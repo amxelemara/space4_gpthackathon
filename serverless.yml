@@ -1,5 +1,7 @@
----
-service: serverless-react-boilerplate
+org: annamachina
+app: scratch-serverless-app
+
+service: scratch-serverless-app
 frameworkVersion: "3"
 useDotenv: true
 variablesResolutionMode: 20210326
@@ -9,7 +11,7 @@ disabledDeprecations:
 provider:
   name: aws
   runtime: nodejs12.x
-  region: ${opt:region, 'us-east-1'}
+  region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
   memorySize: 512
   timeout: 6
