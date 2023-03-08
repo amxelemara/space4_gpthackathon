@@ -14,8 +14,9 @@ export default function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Welcome to {config.app.TITLE}</h1>
+        {/* <h1 className="App-title">Welcome to {config.app.TITLE}</h1> */}
       </header>
+
       <p className="App-intro">
         Lets make a card!
       </p>

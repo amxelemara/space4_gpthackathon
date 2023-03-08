@@ -3,12 +3,14 @@
 }
 
 .App-logo {
-  height: 180px;
+  max-width: 40%;
+  height: auto;
 }
 
 .App-header {
   background-color: #fff;
-  height: 150px;
+  max-width: 100%;
+  height: auto;
   padding: 20px;
   color: black;
 }
@@ -18,5 +20,5 @@
 }
 
 .App-intro {
-  font-size: large;
+  font-size: 1em;
 }
