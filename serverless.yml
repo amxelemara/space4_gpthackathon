@@ -58,6 +58,14 @@ functions:
           method: any
           cors: true
 
+  test:
+    handler: handler.test
+    events:
+      - http:
+          path: test/
+          method: GET
+          cors: true
+
 custom:
   distBucketUrl:
     us-east-1:
