@@ -1,5 +1,5 @@
-org: ${file(./cred.yml):org_name}
-app: tldrsci
+# org: ${file(./cred.yml):org_name}
+# app: tldrsci
 
 service: tldrsci-main
 frameworkVersion: "3"
