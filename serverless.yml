@@ -1,5 +1,5 @@
-org: ${file(./cred.yml):org_name}
-app: tldrsci
+# org: ${file(./cred.yml):org_name}
+# app: tldrsci
 
 service: tldrsci-main
 frameworkVersion: "3"
@@ -13,7 +13,7 @@ provider:
   runtime: nodejs12.x
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
-  memorySize: 512
+  memorySize: 1024
   timeout: 6
   logRetentionInDays: 7
   lambdaHashingVersion: 20201221 # for upcoming Serverless v3
@@ -151,9 +151,7 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+        BillingMode: PAY_PER_REQUEST
 
     # Customize the API Gateway resource
     ApiGatewayRestApi:
