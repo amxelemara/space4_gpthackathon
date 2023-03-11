@@ -58,6 +58,12 @@ functions:
           method: any
           cors: true
 
+  chat:
+    handler: handler.chat
+    events:
+      - http:
+          path: chat/
+          method: GET
   test:
     handler: handler.test
     events:
