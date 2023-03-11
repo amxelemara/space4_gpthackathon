@@ -1,7 +1,7 @@
-org: annamachina
-app: scratch-serverless-app
+org: tldrsci-space4
+app: tldrsci
 
-service: scratch-serverless-app
+service: tldrsci-main
 frameworkVersion: "3"
 useDotenv: true
 variablesResolutionMode: 20210326
