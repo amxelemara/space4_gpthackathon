@@ -3,7 +3,7 @@ import "./App.css";
 import * as React from "react";
 
 import useConfig from "./components/useConfig";
-import logo from "./inkwell_logo.svg";
+import logo from "./logo.svg";
 
 /**
  * Our Web Application
@@ -26,7 +26,7 @@ export default function App() {
 const Intro: React.FC = () => {
   return (
     <p className="App-intro">
-      Lets make a card!
+      Untitled Hackathon Project
     </p>
   );
 };
