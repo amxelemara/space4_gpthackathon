@@ -1,6 +1,7 @@
 import "source-map-support/register";
 import { Context, APIGatewayEvent, APIGatewayProxyResultV2 } from "aws-lambda";
 // import axios from 'axios';
+import {myArticles} from './test_data/articles';
 
 export const testHandler = async (event: APIGatewayEvent, _context: Context): Promise<APIGatewayProxyResultV2> => {
   try {
@@ -13,7 +14,7 @@ export const testHandler = async (event: APIGatewayEvent, _context: Context): Pr
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({message: 'success'}),
+      body: JSON.stringify(myArticles),
     };
   } catch (error) {
     console.error(error);
