@@ -13,7 +13,7 @@ provider:
   runtime: nodejs12.x
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
-  memorySize: 512
+  memorySize: 1024
   timeout: 6
   logRetentionInDays: 7
   lambdaHashingVersion: 20201221 # for upcoming Serverless v3
