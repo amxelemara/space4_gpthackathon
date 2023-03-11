@@ -3,7 +3,8 @@ import "./App.css";
 import * as React from "react";
 
 import useConfig from "./components/useConfig";
-import logo from "./logo.svg";
+import logo from "./tldr_sci_logo.png";
+import  ArticleList from "./components/ArticleList";
 
 /**
  * Our Web Application
@@ -27,6 +28,7 @@ const Intro: React.FC = () => {
   return (
     <p className="App-intro">
       Untitled Hackathon Project
+      <ArticleList />
     </p>
   );
 };
