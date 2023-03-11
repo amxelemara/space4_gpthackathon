@@ -1,4 +1,4 @@
-org: tldrsci-space4
+org: ${file(./cred.yml):org_name}
 app: tldrsci
 
 service: tldrsci-main
@@ -73,6 +73,8 @@ functions:
           cors: true
 
 custom:
+  dotenv:
+    path: ./dev.env
   distBucketUrl:
     us-east-1:
       # us-east-1 uses a different URL format than the other regions
