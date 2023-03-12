@@ -116,6 +116,8 @@ functions:
     package:
       include:
         - requirements.txt
+      patterns:
+        - '!node_modules/**'
     environment:
       PYTHONPATH: /var/runtime:/var/task/myenv/lib/${self:custom.pythonRuntime}/site-packages
     events:
