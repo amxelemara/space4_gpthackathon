@@ -62,7 +62,6 @@ plugins:
 
 package:
   individually: true
-  excludeDevDependencies: false
 
 functions:
   serve:
@@ -94,11 +93,6 @@ functions:
           path: test/
           method: GET
           cors: true
-
-  # summarizer_node:
-  #   handler: handler.summarizer
-  #   events:
-  #     - schedule: rate(2 minutes)
 
   summarizer_python:
     handler: handlers/summarizerpy.handler
