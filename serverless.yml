@@ -96,8 +96,13 @@ functions:
 
   summarizer_python:
     handler: handlers/summarizerpy.handler
-    runtime: python3.9
+    runtime: ${self:custom.pythonRuntime}
     timeout: 900
+    package:
+      include:
+        - requirements.txt
+    environment:
+      PYTHONPATH: ${PWD}:${PWD}/myenv/lib/${self:custom.pythonRuntime}/site-packages
     events:
       - s3:
           bucket: ${self:custom.articlesBucket}
@@ -114,12 +119,10 @@ functions:
           - dynamodb:UpdateItem
         Resource:
           - "Fn::GetAtt": [summarizerTable, Arn]
-    package:
-      include:
-        - requirements.txt
 
 custom:
   articlesBucket: articles-${aws:region}-${self:provider.stage}-${aws:accountId}
+  pythonRuntime: python3.9
   dynamodb:
     stages:
       - dev
