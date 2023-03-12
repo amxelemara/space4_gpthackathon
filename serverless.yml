@@ -36,6 +36,8 @@ provider:
   environment:
     TABLE_NAME:
       Ref: researchTable
+    SUMMARIZER_TABLE_NAME:
+      Ref: summarizerTable
     SERVERLESS_PROJECT: ${self:service}
     SERVERLESS_REGION: ${self:provider.region}
     SERVERLESS_STAGE: ${self:provider.stage}
@@ -115,7 +117,7 @@ functions:
       include:
         - requirements.txt
     environment:
-      PYTHONPATH: ${PWD}:${PWD}/myenv/lib/${self:custom.pythonRuntime}/site-packages
+      PYTHONPATH: /var/runtime:/var/task/myenv/lib/${self:custom.pythonRuntime}/site-packages
     events:
       - s3:
           bucket: ${self:custom.articlesBucket}
@@ -207,18 +209,9 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
-          - AttributeName: status
-            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        GlobalSecondaryIndexes:
-          - IndexName: status_index
-            KeySchema:
-              - AttributeName: status
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
 
     # Customize the API Gateway resource
