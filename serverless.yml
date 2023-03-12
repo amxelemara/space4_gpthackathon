@@ -32,6 +32,16 @@ provider:
         - dynamodb:DeleteItem
       Resource:
         - "Fn::GetAtt": [researchTable, Arn]
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource:
+        - "Fn::GetAtt": [articlesBucket, Arn]
+    - Effect: Allow
+      Action:
+        - dynamodb:UpdateItem
+      Resource:
+        - "Fn::GetAtt": [summarizerTable, Arn]
 
   environment:
     TABLE_NAME:
@@ -59,7 +69,7 @@ plugins:
   - serverless-plugin-scripts
   - serverless-s3-deploy
   - serverless-dynamodb-local
-  - serverless-iam-roles-per-function
+  # - serverless-iam-roles-per-function
   - serverless-offline
 
 package:
@@ -132,17 +142,6 @@ functions:
           bucket: ${self:custom.articlesBucket}
           event: s3:ObjectCreated:*
           existing: true
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - s3:GetObject
-        Resource:
-          - "Fn::GetAtt": [articlesBucket, Arn]
-      - Effect: Allow
-        Action:
-          - dynamodb:UpdateItem
-        Resource:
-          - "Fn::GetAtt": [summarizerTable, Arn]
 
 custom:
   articlesBucket: articles-${aws:region}-${self:provider.stage}-${aws:accountId}
