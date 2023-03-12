@@ -100,6 +100,7 @@ functions:
       - s3:
           bucket: ${self:custom.articlesBucket}
           event: s3:ObjectCreated:*
+          existing: true
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -230,7 +231,7 @@ resources:
     # S3 Bucket for the articles
     articlesBucket:
       Type: AWS::S3::Bucket
-      DeletionPolicy: Retain
+      # DeletionPolicy: Retain
       Properties:
             BucketName: ${self:custom.articlesBucket}
 
