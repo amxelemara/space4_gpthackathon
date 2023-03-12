@@ -10,7 +10,6 @@ disabledDeprecations:
 
 provider:
   name: aws
-  runtime: nodejs12.x
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
   memorySize: 1024
@@ -61,8 +60,13 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-offline
 
+package:
+  individually: true
+  excludeDevDependencies: false
+
 functions:
   serve:
+    runtime: nodejs12.x
     # Any web request regardless of path or method will be handled by a single Lambda function
     handler: handler.serve
     events:
@@ -76,12 +80,14 @@ functions:
           cors: true
 
   chat:
+    runtime: nodejs12.x
     handler: handler.chat
     events:
       - http:
           path: chat/
           method: GET
   test:
+    runtime: nodejs12.x
     handler: handler.test
     events:
       - http:
