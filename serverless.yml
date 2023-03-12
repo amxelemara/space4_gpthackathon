@@ -96,6 +96,7 @@ functions:
   summarizer_python:
     handler: handlers/summarizerpy.handler
     runtime: python3.9
+    timeout: 900
     events:
       - s3:
           bucket: ${self:custom.articlesBucket}
@@ -112,6 +113,9 @@ functions:
           - dynamodb:UpdateItem
         Resource:
           - "Fn::GetAtt": [summarizerTable, Arn]
+    package:
+      include:
+        - requirements.txt
 
 custom:
   articlesBucket: articles-${aws:region}-${self:provider.stage}-${aws:accountId}
@@ -233,7 +237,7 @@ resources:
       Type: AWS::S3::Bucket
       # DeletionPolicy: Retain
       Properties:
-            BucketName: ${self:custom.articlesBucket}
+        BucketName: ${self:custom.articlesBucket}
 
   Outputs:
     ApiGatewayRestApi:
