@@ -108,6 +108,13 @@ functions:
           path: article/{any+}
           method: GET
           cors: true
+  testData:
+    runtime: nodejs12.x
+    handler: handler.testData
+    events:
+      - http:
+          path: testdata/
+          method: GET
 
   summarizer_python:
     handler: handlers/summarizerpy.handler
