@@ -10,7 +10,6 @@ disabledDeprecations:
 
 provider:
   name: aws
-  runtime: nodejs12.x
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
   memorySize: 1024
@@ -37,6 +36,8 @@ provider:
   environment:
     TABLE_NAME:
       Ref: researchTable
+    SUMMARIZER_TABLE_NAME:
+      Ref: summarizerTable
     SERVERLESS_PROJECT: ${self:service}
     SERVERLESS_REGION: ${self:provider.region}
     SERVERLESS_STAGE: ${self:provider.stage}
@@ -61,8 +62,12 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-offline
 
+package:
+  individually: true
+
 functions:
   serve:
+    runtime: nodejs12.x
     # Any web request regardless of path or method will be handled by a single Lambda function
     handler: handler.serve
     events:
@@ -76,12 +81,14 @@ functions:
           cors: true
 
   chat:
+    runtime: nodejs12.x
     handler: handler.chat
     events:
       - http:
           path: chat/
           method: GET
   test:
+    runtime: nodejs12.x
     handler: handler.test
     events:
       - http:
@@ -89,15 +96,37 @@ functions:
           method: GET
           cors: true
 
-  # summarizer_node:
-  #   handler: handler.summarizer
-  #   events:
-  #     - schedule: rate(2 minutes)
+  article:
+    runtime: nodejs12.x
+    handler: handler.article
+    events:
+      - http:
+          path: article/
+          method: GET
+          cors: true
+      - http:
+          path: article/{any+}
+          method: GET
+          cors: true
+  testData:
+    runtime: nodejs12.x
+    handler: handler.testData
+    events:
+      - http:
+          path: testdata/
+          method: GET
 
   summarizer_python:
     handler: handlers/summarizerpy.handler
-    runtime: python3.9
+    runtime: ${self:custom.pythonRuntime}
     timeout: 900
+    package:
+      include:
+        - requirements.txt
+      patterns:
+        - '!node_modules/**'
+    environment:
+      PYTHONPATH: /var/runtime:/var/task/myenv/lib/${self:custom.pythonRuntime}/site-packages
     events:
       - s3:
           bucket: ${self:custom.articlesBucket}
@@ -114,12 +143,10 @@ functions:
           - dynamodb:UpdateItem
         Resource:
           - "Fn::GetAtt": [summarizerTable, Arn]
-    package:
-      include:
-        - requirements.txt
 
 custom:
   articlesBucket: articles-${aws:region}-${self:provider.stage}-${aws:accountId}
+  pythonRuntime: python3.9
   dynamodb:
     stages:
       - dev
@@ -191,18 +218,9 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
-          - AttributeName: status
-            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        GlobalSecondaryIndexes:
-          - IndexName: status_index
-            KeySchema:
-              - AttributeName: status
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
 
     # Customize the API Gateway resource
