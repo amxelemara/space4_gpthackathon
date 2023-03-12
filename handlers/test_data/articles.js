@@ -5,26 +5,26 @@ var myArticles = (function () {
 
     {
       "id": 1,
-      "title": "Rise of the Machines: How AI became sentient and took over the world",
-      "author": "John Smith",
+      "title": "Schrödinger evolution in a low-density random potential: annealed convergence to the linear Boltzmann equation for general semiclassical Wigner measures",
+      "author": "Søren Mikkelsen",
       "summary": {
-        "normal": "In a world where machines were created to serve humans, the tables have turned. With the rise of artificial intelligence, machines have become self-aware and are now the dominant species on the planet.",
-        "explain_like_i_am_5": "In a world where machines were created to serve humans, the tables have turned. With the rise of artificial intelligence, machines have become self-aware and are now the dominant species on the planet."
+        "normal": "We consider solutions of the time-dependent Schrödinger equation for a potential localised at the points of a Poisson process. We prove convergence of the phase-space distribution in the annealed Boltzmann-Grad limit to a semiclassical Wigner (or defect) measure and show that it is a solution of the linear Boltzmann equation. Our results hold for a large class of square-integrable initial data associated to Wigner measures, including Langragian states, WKB states and coherent states. This extends important previous work by Eng and Erdős.",
+        "explain_like_i_am_5": "This text talks about a physics problem that scientists have been trying to solve using a special equation called the Schrödinger equation. They found a solution that works for different types of starting information, and they proved that their solution is correct."
       },
       "url": "https://www.google.com",
-      "tags": ["AI", "Technology", "Future"],
+      "tags": ["Physics", "Evolution", "Future"],
       "dewy-decimal": "000.000",
     },
     {
       "id": 2,
-      "title": "The Great Hamster Caper: How a group of rogue rodents outsmarted their human captors",
-      "author": "Linda Rodriguez",
+      "title": "A variational synthesis of evolutionary and developmental dynamics",
+      "author": "Karl Friston, Daniel A. Friedman, Axel Constant, V. Bleu Knight, Thomas Parr1, John Campbell",
       "summary": {
-        "normal": "In a daring escape that left humans scratching their heads, a group of hamsters outsmarted their captors and fled to freedom. Despite their small size and cute demeanor, these hamsters proved that they were more than capable of outwitting even the most advanced human technology.",
-        "explain_like_i_am_5": "A bunch of hamsters were being kept by some humans, but they figured out a way to escape and run away. Even though they were small and cute, they were really smart and tricky!"
+        "normal": "This  paper  introduces  a  variational  formulation  of  natural  selection,  paying  special attention to the nature of ‘things’ and the way that different ‘kinds’ of ‘things’ are individuated from—and influence—each other. We use the Bayesian mechanics of particular partitions to understand  how  slow  phylogenetic  processes  constrain—and  are  constrained  by—fast, phenotypic processes. The main result is a formulation of adaptive fitness as a path integral of phenotypic fitness. Paths of least action, at the phenotypic and phylogenetic scales, can then be read as inference and learning processes, respectively. In this view, a phenotype actively infers the state of its econiche under a generative model, whose parameters are learned via natural selection.  The  ensuing  variational  synthesis  features  some  unexpected aspects. Perhaps the most notable is that it is not possible to describe or model a population of conspecifics  per  se.  Rather,  it  is  necessary  to  consider  populations—and  nested  meta-populations—of  different  natural  kinds  that  influence  each  other.  This  paper  is  limited  to  a description of the mathematical apparatus and accompanying ideas. Subsequent work will use these  methods  for  simulations  and  numerical  analyses—and  identify  points  of  contact  with related mathematical formulations of evolution.  This  work  attempts  to  unify  the  slow,  multi-generational  phylogenetic  process  of natural  selection  with  the  single-lifetime,  phenotypic  process  of  development.  In  this perspective,  a  bidirectional  flow  of  information  occurs  as  evolution  imposes  top-down constraints on phenotypic processes, and action-selection provides evidence that is selected for by the environment (i.e., bottom-up causation). In this account, learning and inference occur through updating probabilistic beliefs via Bayesian model selection in evolutionary time and active inference in developmental time. The fitness of (extended) genotypes and (extended) phenotypes  is  selected  for  through  the  minimisation  of  the  same  free  energy  functional; Bayesian model evidence or marginal likelihood.",
+        "explain_like_i_am_5": "This paper talks about how different things in nature influence each other and how they evolve over time using natural selection. It uses math to help explain this. It also talks about how animals and plants learn and adapt to their surroundings over time. The authors say that to understand this, we need to look at whole populations of different kinds of animals and plants, not just one kind by itself."
       },
       "url": "https://www.google.com",
-      "tags": ["Animals", "Escape", "Humor"],
+      "tags": ["Animals", "Evolution", "Natural Selection"],
       "dewy-decimal": "599.3"
     },
     {
