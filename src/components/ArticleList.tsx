@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Grid, TextField } from "@mui/material";
 import ArticleCard from "./ArticleCard";
 
+interface ArticleSummary {
+  normal: string;
+  explain_like_i_am_5: string;
+}
+
 interface Article {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
+    id: number;
+    title: string;
+    author: string;
+    summary: ArticleSummary;
+    tags: string[];
+    dewyDecimal: string;
+    url: string;
 }
 
 function ArticleList(): JSX.Element {
@@ -23,6 +31,9 @@ function ArticleList(): JSX.Element {
 
   const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchTerm.toLowerCase())
+    // or article.content.toLowerCase().includes(searchTerm.toLowerCase())
+    || article.tags.join().toLowerCase().includes(searchTerm.toLowerCase())
+
   );
 
   return (
