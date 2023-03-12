@@ -88,7 +88,32 @@ functions:
           method: GET
           cors: true
 
+  # summarizer_node:
+  #   handler: handler.summarizer
+  #   events:
+  #     - schedule: rate(2 minutes)
+
+  summarizer_python:
+    handler: handlers/summarizerpy.handler
+    runtime: python3.9
+    events:
+      - s3:
+          bucket: ${self:custom.articlesBucket}
+          event: s3:ObjectCreated:*
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:GetObject
+        Resource:
+          - "Fn::GetAtt": [articlesBucket, Arn]
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem
+        Resource:
+          - "Fn::GetAtt": [summarizerTable, Arn]
+
 custom:
+  articlesBucket: articles-${aws:region}-${self:provider.stage}-${aws:accountId}
   dynamodb:
     stages:
       - dev
@@ -153,6 +178,27 @@ resources:
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
 
+    summarizerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: summarizerTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: status
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: status_index
+            KeySchema:
+              - AttributeName: status
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
+
     # Customize the API Gateway resource
     ApiGatewayRestApi:
       Type: AWS::ApiGateway::RestApi
@@ -180,6 +226,13 @@ resources:
                       - Ref: AWS::Region
                       - .amazonaws.com
               MaxAge: 3000
+
+    # S3 Bucket for the articles
+    articlesBucket:
+      Type: AWS::S3::Bucket
+      DeletionPolicy: Retain
+      Properties:
+            BucketName: ${self:custom.articlesBucket}
 
   Outputs:
     ApiGatewayRestApi:
